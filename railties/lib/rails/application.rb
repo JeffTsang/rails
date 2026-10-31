@@ -491,7 +491,11 @@ module Rails
     # <tt>config/credentials/#{environment}.key</tt> for the current
     # environment, or +config/master.key+ if that file does not exist.
     def credentials
-      @credentials ||= encrypted(config.credentials.content_path, key_path: config.credentials.key_path)
+      @credentials ||= encrypted(
+        config.credentials.content_path,
+        key_path: config.credentials.key_path,
+        env_key: config.credentials.env_key
+      )
     end
 
     # Returns an ActiveSupport::EncryptedConfiguration instance for an encrypted
